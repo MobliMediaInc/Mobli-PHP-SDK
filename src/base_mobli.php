@@ -376,7 +376,7 @@ abstract class BaseMobli
           $this->accessToken = $access_token_data->access_token;
           $this->refreshToken = $access_token_data->refresh_token;
           $this->expirationTime = time() + $access_token_data->expires_in;
-          $this->accessTokenType = self::MOBLI_ACCESS_TOKEN_TYPE_USER;
+          $this->accessTokenType = $access_token_data->token_type;
           $this->userId = $access_token_data->user->id;
           $this->code = $code;
           $this->saveToPersistentStore();
@@ -421,7 +421,7 @@ abstract class BaseMobli
           $this->accessToken = $access_token_data->access_token;
           $this->refreshToken = $access_token_data->refresh_token;
           $this->expirationTime = time() + $access_token_data->expires_in;
-          $this->accessTokenType = self::MOBLI_ACCESS_TOKEN_TYPE_PUBLIC;
+          $this->accessTokenType = $access_token_data->token_type;
           $this->userId = 0;
           $this->saveToPersistentStore();
         }
