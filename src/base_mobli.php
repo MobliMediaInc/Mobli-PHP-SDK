@@ -636,27 +636,31 @@ abstract class BaseMobli
         $params,
         $files);
 
+    if ($response_code != 200)
+    {
+      $payload = new stdClass();
+      $payload->code = $response_code;
+      $payload->userInfo = "Server error.";
+      $this->throwAPIException($payload, $payload->code);
+    }
+    $result = json_decode($result);
     if ($result)
     {
-      $result = json_decode($result);
-      if ($result)
+      $success = (isset($result->success) ? $result->success : false);
+      $payload = (isset($result->payload) ? $result->payload : false);
+      if (!$payload)
       {
-        $success = (isset($result->success) ? $result->success : false);
-        $payload = (isset($result->payload) ? $result->payload : false);
-        if (!$payload)
-        {
-          $success = false;
-          $payload = new stdClass();
-          $payload->code = 500;
-          $payload->userInfo = "Unknown error";
-        }
-        if ($response_code != 200 || !$success)
-        {
-          $this->throwAPIException($payload, 500);
-        }
+        $success = false;
+        $payload = new stdClass();
+        $payload->code = 500;
+        $payload->userInfo = "Unknown error";
       }
-      $result = $payload;
+      if ($response_code != 200 || !$success)
+      {
+        $this->throwAPIException($payload, $payload->code);
+      }
     }
+    $result = $payload;
 
     return array($response_code, $result);
   }
