@@ -1,4 +1,3 @@
-
 Mobli PHP SDK (v.1.0)
 ==========================
 
@@ -9,6 +8,7 @@ and POST requests for uploading photos, commenting, sharing on other social medi
 This repository contains the open source PHP SDK that allows you to access Mobli from your PHP app. Except as otherwise noted, the Mobli PHP SDK
 is licensed under the Apache Licence, Version 2.0
 (http://www.apache.org/licenses/LICENSE-2.0.html)
+Mobli PHP SDK is based on Facebook PHP SDK.
 
 You can perform requests as either a guest or as a logged in user.
 as a guest user you will be able to GET media such as popular photos, live media, etc..
